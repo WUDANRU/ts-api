@@ -1,0 +1,60 @@
+setup选项中没有this,无法访问组件声明中的属性
+setup函数接收两个参数props与context(ctx)
+props不可解构，context有attrs/slots/emit属性
+在执行setup时，尚未创建组件实例
+
+setup选项中没有this，但是methods中有
+TS类型推导在组合式API中非常的好用
+使用组合式API可以很方便的抽离逻辑代码进行复用
+
+组合式API：watch(watch可以写在setup和methods中，watch写在setup就是响应式) & watchEffect(watchEffect写在setup中。watchEffect: 函数中的响应式内容发生变化时，函数立即执行)
+WatchEffect = (onInvalidate: InvalidateCbRegistrator) => void; //WatchEffect是一个函数没有任何的返回值
+export declare function watchEffect(effect: WatchEffect //effect是接收的影响
+ flush?: 'pre' | 'post' | 'sync'; //pre是组件更新之前，post是(默认)组件更新之后，sync是同步组件
+
+
+ 组合式API：watch & watchEffect：
+ 都可以侦听响应式对象的变化，从而执行回调
+ watchEffect：会默认执行一次，而watch不会，必须事件触发
+ watchEffect只接收函数作为回调参数
+ watch可以侦听多个响应式对象
+
+ 组合式API：watch & watchEffect & computed
+ 搜索：如何在ts中配置this指向问题,defineComponent({})的this不明确问题
+Composition API是响应式API也是组合式API
+
+ 之前没有ts的API是optionsAPI,现在的ts的API是组合式API(Composition API)
+
+ reactive可以让lists和lists里面的属性都加入响应式
+
+ readonly，只读(只能获取),不能修改
+
+判断的响应式API，返回true或false(is开头的api就是作判断的)
+ isProxy,是不是代理
+ isReactive,是不是响应式对象
+ isReadonly,是不是只读对象
+
+ toRaw,toRef等的响应式API，to开头的api就是转换的
+ toRef,可以用来为(为即转换)源响应式对象上的property属性创建一个ref。然后可以将ref传递出去，从而保持对其源property的响应式连接。
+
+ reactive,"深"转换响应式副本，readonly创建只读对象(深代表很里面的孩子)
+ ref需要.value，reactive可以直接使用属性名(比如home.ts的state.lists)
+
+ setup(props, { emit, attrs }) {}   |   setup(props, ctx) {}
+
+ 响应式就是可以重新赋值
+
+ created和beforeCreated等价于setup //created和beforeCreated这两个生命周期的方法写到setup中，是等价的
+
+Vue3中destroy相关进行了改名：
+destroy -> unmounted
+beforeDestroy -> beforeUnmount
+
+Vue3 ts链接
+https://v3.cn.vuejs.org/api/composition-api.html#%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E9%92%A9%E5%AD%90
+https://v3.cn.vuejs.org/api/options-lifecycle-hooks.html#beforecreate
+
+render*可以方便的用于调试：onRenderTracked  onRenderTriggered
+Setup()优先于beforeCreate(现在不存在它了)执行
+
+Render,Tracked,Triggered即渲染、跟踪、触发

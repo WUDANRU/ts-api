@@ -1,0 +1,41 @@
+Composition API  // 组合式API
+
+Vue VSCode Snippets插件，在空白的.vue文件输入v就会显示vbase-3-ts等
+
+App.vue的router-link to="/"(或router-view)没有效果是因为main.ts没有use(router)
+访问这个http://localhost:8081/#/about才有效果 （不能写成http://localhost:8081/about）
+
+
+关闭报错提示第一种：tsconfig.json的"noImplicitThis":false，一般不建议使用
+关闭报错提示第二种：import { defineComponent } from "vue"; 和 export default defineComponent({
+
+
+问题：Vue + Ts 模块 ""vue-router"" 没有导出的成员 "createRouter"
+解决：
+npm uninstall vue-router
+npm install vue-router@next -S
+
+
+问题:
+error  in ./src/App.vue?vue&type=style&index=0&id=7ba5bd90&lang=scss
+Syntax Error: TypeError: this.getOptions is not a function
+解决：
+cnpm uninstall --save sass-loader // 卸载
+cnpm i -D sass-loader@8.x // 安装
+cnpm uninstall --save node-sass // 卸载
+cnpm i node-sass@4.14.1 // 安装
+// 如果node-sass安装失败，也可以直接在package.json中写上版本号，删除node_modules文件夹，重新npm i即可
+
+
+问题：
+没有vuex模块
+解决：
+安装vuex
+
+
+问题:
+模块 ""vuex"" 没有导出的成员 "createStore"。你是想改用 "import createStore from "vuex"" 吗?
+解决：
+1、cnpm uninstall --save vuex
+2、安装与 vue 3 兼容的版本 4：
+cnpm install vuex@next --save
